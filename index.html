@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0b0f3f">
+    <title>Babi - Anime Gamer Birthday</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%230b0f3f'/><circle cx='50' cy='50' r='40' fill='%2300ffff'/></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Landing Page -->
+    <section id="landingPage" class="landing-page active">
+        <div class="landing-content">
+            <div class="birthday-card neon-card">
+                <div class="card-image-container">
+                    <img src="a1.jpg" alt="Birthday Person" class="card-image neon-glow">
+                </div>
+                <div class="card-text">
+                    <h1 class="card-title neon-text">🎮 HAPPY BIRTHDAY, BABI!!! 🎮</h1>
+                    <p class="card-message neon-text" id="birthNameMessage">
+                        Welcome to your epic 3D birthday gift!<br>
+                        I hope you like this web creates just for you.<br>
+                        Enjoy roaming around and playing.❤️.
+                    </p>
+                    <button class="enter-btn neon-btn" onclick="showLogin()">
+                        <span>ENTER</span> <span class="arrow">→</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Experience Container -->
+    <section id="experienceContainer" class="experience-hidden">
+        <!-- HUD / UI -->
+        <div class="hud-container neon-hud">
+            <div class="hud-top">
+                <div class="room-name neon-text" id="roomName">Main Hallway</div>
+                <button class="exit-btn neon-btn" onclick="exitExperience()">❌ EXIT</button>
+            </div>
+            <div class="hud-bottom">
+                <div class="controls-info neon-text">
+                    🎮 WASD: Move | Mouse: Look | SPACE: Interact | ESC: Back
+                </div>
+            </div>
+        </div>
+
+        <!-- Interaction Prompt -->
+        <div id="interactionPrompt" class="interaction-prompt hidden neon-text">
+            <div class="prompt-content">
+                <span id="promptText">Press SPACE to interact</span>
+                <div class="prompt-hint">SPACE</div>
+            </div>
+        </div>
+
+        <!-- Mobile Tap Area -->
+        <div id="mobileTapArea" class="mobile-tap-area hidden"></div>
+        <div id="gameContent" class="game-modal hidden neon-card">
+            <div class="game-modal-content">
+                <button class="close-game-btn neon-btn" onclick="closeGame()">✕</button>
+                <div id="gameContentInner"></div>
+            </div>
+        </div>
+
+        <!-- Envelope Modal -->
+        <div id="envelopeModal" class="game-modal hidden neon-card">
+            <div class="envelope-modal-content">
+                <button class="close-envelope-btn neon-btn" onclick="closeEnvelope()">✕</button>
+                <div class="envelope-container neon-text">
+                    <div class="envelope-icon">📩</div>
+                    <div id="envelopeMessage" class="envelope-message"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Canvas for 3D rendering -->
+    <canvas id="canvas" class="neon-canvas"></canvas>
+
+    <!-- Login / Question Screen -->
+    <section id="loginScreen" class="landing-page hidden" aria-hidden="true">
+        <div class="landing-content">
+            <div class="birthday-card neon-card">
+                <div class="card-image-container">
+                    <!-- Gamer Accent Row -->
+                    <div class="accent-row">
+                        <div class="penguin" id="penguinSVG" aria-hidden="true">
+                            <svg width="120" height="120" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                                <g id="penguin-body">
+                                    <ellipse cx="32" cy="36" rx="16" ry="18" fill="#0b0f3f"/>
+                                    <path d="M16 22c0-8 8-14 16-14s16 6 16 14v10c0 9-7 16-16 16S16 41 16 32V22z" fill="#111"/>
+                                    <circle cx="24" cy="30" r="2" fill="#0ff"/>
+                                    <circle cx="40" cy="30" r="2" fill="#0ff"/>
+                                    <path id="penguin-wing" d="M10 36c6 2 6 8 12 10" stroke="#0ff" stroke-width="3" stroke-linecap="round" fill="none"/>
+                                    <path d="M26 44c2 2 6 2 8 0" stroke="#ff00ff" stroke-width="3" stroke-linecap="round" fill="none"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="tulips" aria-hidden="true">
+                            <svg width="120" height="80" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+                                <g class="tulip-group" fill="none" stroke-linecap="round">
+                                    <path class="tulip-stem" d="M20 70 L20 50" stroke="#0ff" stroke-width="3"/>
+                                    <path class="tulip-flower" d="M12 50 C18 30, 28 30, 34 50 C20 42, 26 42, 24 50" fill="#9b59ff" stroke="#9b59ff"/>
+                                    <path class="tulip-stem" d="M56 70 L56 50" stroke="#0ff" stroke-width="3"/>
+                                    <path class="tulip-flower" d="M48 50 C54 30, 64 30, 70 50 C56 42, 62 42, 60 50" fill="#00ffff" stroke="#00ffff"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-text">
+                    <h1 class="card-title neon-text">Who's my baby good boy?</h1>
+                    <p class="card-message neon-text">Type your special name to unlock your gift!</p>
+                    <div class="login-input-row">
+                        <input id="answerInput" type="text" placeholder="Enter name..." aria-label="answer input"/>
+                        <button class="enter-btn neon-btn" onclick="checkAnswer()">Enter</button>
+                    </div>
+                    <div id="loginFeedback" class="login-feedback neon-text" role="status" aria-live="polite"></div>
+                    <button class="enter-btn neon-btn" style="margin-top:12px;" onclick="backToLanding()">Back</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Three.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+
+    <!-- Room Scripts -->
+    <script src="rooms/memory-room.js"></script>
+    <script src="rooms/game-room.js"></script>
+    <script src="rooms/birthday-room.js"></script>
+
+    <!-- Main Script -->
+    <script src="script.js"></script>
+</body>
+</html>
